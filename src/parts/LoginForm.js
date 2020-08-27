@@ -1,12 +1,20 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from "react";
 
+import users from "constans/api/users";
+
 export default function LoginForm() {
   const [email, setEmail] = useState(() => "");
   const [password, setPassword] = useState(() => "");
+
   const submit = (e) => {
     e.preventDefault();
+
+    users.login({ email, password }).then((res) => {
+      console.log(res);
+    });
   };
+
   return (
     <div className="flex justify-center items-center pb-24">
       <div className="w-3/12">
