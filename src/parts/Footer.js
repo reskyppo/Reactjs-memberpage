@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   function submit() {}
@@ -11,31 +11,35 @@ export default function Footer() {
           <h6 className="text-white">Company</h6>
           <ul className="mt-4">
             <li className="mt-2">
-              <Link href="#">
-                <a className="text-indigo-500 hover:text-teal-500 hover:underline">
-                  API Developer
-                </a>
+              <Link
+                className="text-indigo-500 hover:text-teal-500 hover:underline"
+                to="#"
+              >
+                API Developer
               </Link>
             </li>
             <li className="mt-2">
-              <Link href="#">
-                <a className="text-indigo-500 hover:text-teal-500 hover:underline">
-                  Career
-                </a>
+              <Link
+                className="text-indigo-500 hover:text-teal-500 hover:underline"
+                to="#"
+              >
+                Career
               </Link>
             </li>
             <li className="mt-2">
-              <Link href="#">
-                <a className="text-indigo-500 hover:text-teal-500 hover:underline">
-                  Our Story
-                </a>
+              <Link
+                className="text-indigo-500 hover:text-teal-500 hover:underline"
+                to="#"
+              >
+                Our Story
               </Link>
             </li>
             <li className="mt-2">
-              <Link href="#">
-                <a className="text-indigo-500 hover:text-teal-500 hover:underline">
-                  New Soon
-                </a>
+              <Link
+                className="text-indigo-500 hover:text-teal-500 hover:underline"
+                to="#"
+              >
+                New Soon
               </Link>
             </li>
           </ul>
@@ -44,31 +48,35 @@ export default function Footer() {
           <h6 className="text-white">Student</h6>
           <ul className="mt-4">
             <li className="mt-2">
-              <Link href="#">
-                <a className="text-indigo-500 hover:text-teal-500 hover:underline">
-                  Get Scholarship
-                </a>
+              <Link
+                className="text-indigo-500 hover:text-teal-500 hover:underline"
+                to="#"
+              >
+                Get Scholarship
               </Link>
             </li>
             <li className="mt-2">
-              <Link href="#">
-                <a className="text-indigo-500 hover:text-teal-500 hover:underline">
-                  Our Pathskills
-                </a>
+              <Link
+                className="text-indigo-500 hover:text-teal-500 hover:underline"
+                to="#"
+              >
+                Our Pathskills
               </Link>
             </li>
             <li className="mt-2">
-              <Link href="#">
-                <a className="text-indigo-500 hover:text-teal-500 hover:underline">
-                  All Features
-                </a>
+              <Link
+                className="text-indigo-500 hover:text-teal-500 hover:underline"
+                to="#"
+              >
+                All Features
               </Link>
             </li>
             <li className="mt-2">
-              <Link href="#">
-                <a className="text-indigo-500 hover:text-teal-500 hover:underline">
-                  Refund Policy
-                </a>
+              <Link
+                className="text-indigo-500 hover:text-teal-500 hover:underline"
+                to="#"
+              >
+                Refund Policy
               </Link>
             </li>
           </ul>

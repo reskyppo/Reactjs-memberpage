@@ -3,16 +3,50 @@ import React, { useState } from "react";
 
 import users from "constans/api/users";
 
-export default function LoginForm() {
+import { setAuthorizationHeader } from "configs/axios";
+import { withRouter } from "react-router-dom";
+
+const LoginForm = ({ history }) => {
   const [email, setEmail] = useState(() => "");
   const [password, setPassword] = useState(() => "");
 
   const submit = (e) => {
     e.preventDefault();
 
-    users.login({ email, password }).then((res) => {
-      console.log(res);
-    });
+    users
+      .login({ email, password })
+      .then((res) => {
+        setAuthorizationHeader(res.data.token);
+        users.details().then((detail) => {
+          const production =
+            process.env.REACT_APP_FRONTPAGE_URL ===
+            "https://micro.buildwithangga.com"
+              ? "Domain = micro.buildwithangga.com"
+              : "";
+          localStorage.setItem(
+            "BWAMICRO:token",
+            JSON.stringify({ ...res.data, email: email })
+          );
+
+          const redirect = localStorage.getItem("BWAMICRO:redirect");
+          const userCookie = {
+            name: detail.data.name,
+            thumbnail: detail.data.avatar,
+          };
+
+          const expires = new Date(
+            new Date().getTime() * 7 * 24 * 60 * 60 * 1000
+          );
+
+          document.cookie = `BWAMICRO:user=${JSON.stringify(
+            userCookie
+          )}; expires=${expires.toUTCString()}; path:/; ${production}`;
+
+          history.push(redirect || "/");
+        });
+      })
+
+      .catch((err) => {});
   };
 
   return (
@@ -81,4 +115,6 @@ export default function LoginForm() {
       </div>
     </div>
   );
-}
+};
+
+export default withRouter(LoginForm);
