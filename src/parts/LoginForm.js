@@ -25,7 +25,10 @@ const LoginForm = ({ history }) => {
               : "";
           localStorage.setItem(
             "BWAMICRO:token",
-            JSON.stringify({ ...res.data, email: email })
+            JSON.stringify({
+              ...res.data,
+              email: email,
+            })
           );
 
           const redirect = localStorage.getItem("BWAMICRO:redirect");
