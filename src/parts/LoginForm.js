@@ -1,14 +1,23 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useState } from "react";
+import React from "react";
 
 import users from "constans/api/users";
 
 import { setAuthorizationHeader } from "configs/axios";
 import { withRouter } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+
+import { populateProfile } from "store/actions/users";
+
+import useForm from "helpers/hooks/useForm";
+
 const LoginForm = ({ history }) => {
-  const [email, setEmail] = useState(() => "");
-  const [password, setPassword] = useState(() => "");
+  const dispatch = useDispatch();
+  const [{ email, password }, setState] = useForm({
+    email: "",
+    password: "",
+  });
 
   const submit = (e) => {
     e.preventDefault();
@@ -18,6 +27,7 @@ const LoginForm = ({ history }) => {
       .then((res) => {
         setAuthorizationHeader(res.data.token);
         users.details().then((detail) => {
+          dispatch(populateProfile(detail.data));
           const production =
             process.env.REACT_APP_FRONTPAGE_URL ===
             "https://micro.buildwithangga.com"
@@ -65,8 +75,9 @@ const LoginForm = ({ history }) => {
               Email Address
             </label>
             <input
+              name="email"
               type="email"
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={setState}
               className="bg-white focus:outline-none border px-6 py-3 w-full border-gray-600 focus:border-teal-500 rounded-md"
               value={email}
               placeholder="Your email address"
@@ -80,8 +91,9 @@ const LoginForm = ({ history }) => {
               Password
             </label>
             <input
+              name="password"
               type="password"
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={setState}
               className="bg-white focus:outline-none border px-6 py-3 w-full border-gray-600 focus:border-teal-500 rounded-md"
               value={password}
               placeholder="Input your password"
