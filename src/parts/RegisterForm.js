@@ -52,6 +52,8 @@ const LoginForm = ({ history }) => {
       return listErrors;
     }, {});
 
+  console.log(profession);
+
   return (
     <div className="flex justify-center items-center pb-24">
       <div className="w-3/12">
@@ -103,14 +105,19 @@ const LoginForm = ({ history }) => {
           </div>
 
           <div className="flex flex-col mb-4">
-            <Select fallbackText="Select Item">
-              <option value="">yow</option>
-              <option value="">yow</option>
-              <option value="">yow</option>
-              <option value="">yow</option>
+            <Select
+              labelName="Occupation"
+              name="profession"
+              value={profession}
+              fallbackText="Select your focus"
+              onClick={setState}
+            >
+              <option value="Web Designer">Web Designer</option>
+              <option value="Frontend Developer">Frontend Developer</option>
+              <option value="Backend Developer">Backend Developer</option>
+              <option value="Other">Other</option>
             </Select>
           </div>
-
 
           <button
             type="submit"
