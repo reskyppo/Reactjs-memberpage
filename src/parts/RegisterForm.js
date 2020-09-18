@@ -11,6 +11,7 @@ import useForm from "helpers/hooks/useForm";
 import fieldErrors from "helpers/fieldErrors";
 
 import Select from "components/Form/Select";
+import Input from "components/Form/Input";
 
 import Images from "../assets/images/image-register.jpg";
 
@@ -61,91 +62,35 @@ const LoginForm = ({ history }) => {
           Anywhere
         </h1>
         <form onSubmit={submit}>
-          <div className="flex flex-col mb-4">
-            <label
-              htmlFor="name"
-              className={[
-                "text-lg mb-2",
-                ERRORS?.name?.message ? "text-red-500" : "text-gray-900",
-              ].join(" ")}
-            >
-              Full Name
-            </label>
-            <input
-              name="name"
-              type="text"
-              onChange={setState}
-              className={[
-                "bg-white focus:outline-none border px-6 py-3 w-full border-gray-600  rounded-md",
-                ERRORS?.name?.message
-                  ? " border-red-500 text-red-500"
-                  : "text-gray-600 focus:border-teal-500 border-gray-600",
-              ].join(" ")}
-              value={name}
-              placeholder="Your name"
-            />
-            <span className="text-red-500 pt-2">
-              {ERRORS?.name?.message}
-            </span>
-          </div>
+          <Input
+            value={name}
+            error={ERRORS?.name?.message}
+            name="name"
+            type="text"
+            onChange={setState}
+            placeholder="Your Name"
+            labelName="Full Name"
+          />
 
-          <div className="flex flex-col mb-4">
-            <label
-              htmlFor="email"
-              className={[
-                "text-lg mb-2",
-                ERRORS?.email?.message ? "text-red-500" : "text-gray-900",
-              ].join(" ")}
-            >
-              Email Address
-            </label>
-            <input
-              name="email"
-              type="email"
-              onChange={setState}
-              className={[
-                "bg-white focus:outline-none border px-6 py-3 w-full border-gray-600  rounded-md",
-                ERRORS?.email?.message
-                  ? " border-red-500 text-red-500"
-                  : "text-gray-600 focus:border-teal-500 border-gray-600",
-              ].join(" ")}
-              value={email}
-              placeholder="Your email address"
-            />
-            <span className="text-red-500 pt-2">
-              {ERRORS?.email?.message}
-            </span>
-          </div>
+          <Input
+            value={email}
+            error={ERRORS?.email?.message}
+            name="email"
+            type="email"
+            onChange={setState}
+            placeholder="Your Email Address"
+            labelName="Email Address"
+          />
 
-          <div className="flex flex-col mb-4">
-            <label
-              htmlFor="password"
-              className={[
-                "text-lg mb-2",
-                ERRORS?.password?.message
-                  ? "text-red-500"
-                  : "text-gray-900",
-              ].join(" ")}
-            >
-              Password
-            </label>
-            <input
-              name="password"
-              type="password"
-              onChange={setState}
-              className={[
-                "bg-white focus:outline-none border px-6 py-3 w-full border-gray-600  rounded-md",
-                ERRORS?.password?.message
-                  ? " border-red-500 text-red-500"
-                  : "text-gray-600 focus:border-teal-500 border-gray-600",
-              ].join(" ")}
-              value={password}
-              placeholder="Input your password"
-            />
-            <span className="text-red-500 pt-2">
-              {ERRORS?.password?.message}
-            </span>
-          </div>
+          <Input
+            value={password}
+            error={ERRORS?.password?.message}
+            name="password"
+            type="password"
+            onChange={setState}
+            placeholder="Input your password"
+            labelName="Password"
+          />
 
           <Select
             labelName="Occupation"
@@ -161,35 +106,15 @@ const LoginForm = ({ history }) => {
           </Select>
 
           {profession === "others" && (
-            <div className="flex flex-col mb-4">
-              <label
-                htmlFor="otherProfession"
-                className={[
-                  "text-lg mb-2",
-                  ERRORS?.otherProfession?.message
-                    ? "text-red-500"
-                    : "text-gray-900",
-                ].join(" ")}
-              >
-                Other's Occupation
-              </label>
-              <input
-                name="otherProfession"
-                type="text"
-                onChange={setState}
-                className={[
-                  "bg-white focus:outline-none border px-6 py-3 w-full border-gray-600  rounded-md",
-                  ERRORS?.otherProfession?.message
-                    ? " border-red-500 text-red-500"
-                    : "text-gray-600 focus:border-teal-500 border-gray-600",
-                ].join(" ")}
-                value={otherProfession}
-                placeholder="Your profession"
-              />
-              <span className="text-red-500 pt-2">
-                {ERRORS?.otherProfession?.message}
-              </span>
-            </div>
+            <Input
+              value={otherProfession}
+              error={ERRORS?.otherProfession?.message}
+              name="otherProfession"
+              type="text"
+              onChange={setState}
+              placeholder="Your profession"
+              labelName="Other's Occupation"
+            />
           )}
 
           <button
