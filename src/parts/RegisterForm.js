@@ -118,7 +118,7 @@ const LoginForm = ({ history }) => {
           )}
 
           <button
-            type="submit"
+            type="submfit"
             className="mt-4 w-full bg-orange-500 hover:bg-orange-400 transition-all duration-200 focus:outline-none shadow-inner text-white px-6 py-3"
           >
             Daftar
