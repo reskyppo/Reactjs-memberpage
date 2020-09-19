@@ -66,7 +66,6 @@ const Header = ({ onLight, location }) => {
         </li>
         <li>
           <Link
-            target="_blank"
             to={linkCTA}
             className="bg-indigo-700 hover:bg-indigo-800 transition-all duration-200 text-white hover:text-teal-500 text-lg px-6 py-3 font-medium"
           >
