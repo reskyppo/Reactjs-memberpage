@@ -13,6 +13,11 @@ const Sidebar = ({ match, history }) => {
       : "text-indigo-500";
   };
 
+  const logout = () => {
+    history.push("/login");
+    localStorage.removeItem("BWAMICRO:token");
+  };
+
   const users = useSelector((state) => state.users);
 
   return (
@@ -35,10 +40,79 @@ const Sidebar = ({ match, history }) => {
               />
             )}
           </div>
+
+          <h6 className="text-white text-xl">{users?.name ?? "username"}</h6>
+
+          <span className="text-indigo-500 text-sm">
+            {users?.profession ?? "profession"}
+          </span>
+        </div>
+
+        <ul className="main-menu mt-12">
+          <li>
+            <Link
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                getNavLinkClass("/"),
+              ].join(" ")}
+              to="/"
+            >
+              My Class
+            </Link>
+          </li>
+          <li>
+            <a
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                getNavLinkClass("/library"),
+              ].join(" ")}
+              href={`${process.env.REACT_APP_FRONTPAGE_URL}/library`}
+              target="_blank"
+              rel="noopener norefrerrer"
+            >
+              Library
+            </a>
+          </li>
+          <li>
+            <Link
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left text-indigo-500",
+              ].join(" ")}
+              to="/transactions"
+            >
+              Transactions
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={[
+                "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                getNavLinkClass("/settings"),
+              ].join(" ")}
+              to="/settings"
+            >
+              Setting
+            </Link>
+          </li>
+        </ul>
+
+        <div className="my-auto">
+          <ul className="main-menu mt-12">
+            <li>
+              <button
+                className={[
+                  "nav-link relative flex items-center py-3 px-5 transition-all duration-200 hover:text-white active:text-white focus:outline-none w-full text-left",
+                ].join(" ")}
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </aside>
   );
 };
 
-export default Sidebar;
+export default withRouter(Sidebar);
