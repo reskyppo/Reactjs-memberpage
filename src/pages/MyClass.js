@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import Sidebar from "parts/Sidebar";
+import ListClassItem from "parts/ListClassItem";
+import Loading from "parts/Loading";
+
+import courses from "constans/api/courses";
+
+import {
+  statusCourses,
+  fetchCourses,
+  messageCourse,
+} from "store/actions/courses";
+
 const EmptyState = () => {
   return (
     <section className="flex h-screen items-center">
@@ -28,12 +41,53 @@ const EmptyState = () => {
 };
 
 const MyClass = () => {
+  const dispatch = useDispatch();
+  const COURSES = useSelector((state) => state.courses);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+
+    dispatch(statusCourses("loading"));
+    courses
+      .mine()
+      .then((res) => {
+        console.log(res);
+        dispatch(fetchCourses(res));
+      })
+      .catch((err) => {
+        dispatch(messageCourse(err?.response?.data?.message ?? "error"));
+      });
+  }, [dispatch]);
+
   return (
     <div className="flex">
       <Sidebar />
       <main className="flex-1">
         <div className="px-16">
-          <EmptyState />
+          {COURSES.status === "loading" && <Loading />}
+          {COURSES.status === "error" && COURSES.message}
+          {COURSES.status === "ok" &&
+            (COURSES.total > 0 ? (
+              <>
+                <section className="flex flex-col mt-8">
+                  <h1 className="text-4xl text-gray-900 font-medium">
+                    My Class
+                  </h1>
+                  <p className="text-lg text-gray-600">
+                    Continue learing to pursue your dreams
+                  </p>
+                </section>
+                <section className="flex flex-col mt-8">
+                  <div className="flex justify-start items-center -mx-4">
+                    {Object.values(COURSES.data)?.map?.((item, idx) => {
+                      return <ListClassItem data={item.course} key={idx} />;
+                    })}
+                  </div>
+                </section>
+              </>
+            ) : (
+              <EmptyState />
+            ))}
         </div>
       </main>
     </div>
